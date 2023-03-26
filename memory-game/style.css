@@ -1,0 +1,446 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+    height: 100%;
+    font-family: 'Redressed', cursive;
+    background-image: url(./assets/icons/9.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+:root {
+  --white: #f4f4f2;
+  --blue-gray: #d4cabd;
+  --blue-text: #272f3d;
+  --blue-card-1: #4f668b;
+  --blue-card-2: #32425c;
+}
+
+img {
+    position: absolute;
+    height: 100%;
+    margin: auto;
+    bottom: 0;
+    top: 0;
+    right: 0;
+    left: 0;
+  }
+
+  h3 {
+    margin: 0;
+  }
+
+.wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.main {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  justify-content: center;
+  text-align: center;
+  z-index: 2;
+  color: var(--blue-gray);
+  cursor: default;
+}
+
+.overlay.active {
+  display: flex;
+  flex-direction: column;
+  animation: overlay .5s forwards;
+}
+
+@keyframes overlay {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 0;
+  }
+  to {
+    background-color: rgba(0, 0, 0, .7);
+    font-size: 8em;
+  }
+}
+
+.modal {
+  transition: all .3s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
+  background: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+  cursor: default;
+}
+
+.modal-content {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-body {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2), 0 16px 20px rgba(0,0,0,0.2);
+  border-radius: 10px;
+  background-color: var(--blue-gray);
+  padding: 20px 40px;
+  max-width: 700px;
+  text-align: center;
+}
+
+.modal-title {
+  font-size: 8em;
+  color: var(--blue-text);
+}
+
+.overlay-span {
+  display: block;
+  font-size: 5em;
+  border-bottom: 2px solid var(--blue-text);
+  margin-bottom: 10px;
+  color: var(--blue-text);
+}
+
+.results {
+  font-size: 3em;
+  color: var(--blue-text);
+}
+
+.mobile-inform-container {
+  display: none;
+}
+
+.mobile-flips,
+.mobile-timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 100px;
+  justify-content: center;
+}
+
+.inform-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 8em;
+  color: var(--blue-text);
+  text-shadow: rgba(0,0,0,0.3) 0px 4px 8px;
+  text-align: center;
+  width: 400px;
+}
+
+.result-button {
+  width: 300px;
+  padding: 10px;
+  border: transparent;
+  background-color: var(--blue-card-2);
+  box-shadow: 0px 5px 15px rgba(0,0,0,0.6);
+  color: var(--white);
+  border-radius: 10px;
+  font-family: 'Redressed', cursive;
+  font-size: 0.5em;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.result-button:hover {
+  background-color: var(--blue-card-1);
+}
+
+.game-field {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-gap: 10px;
+  margin: 10px 0;
+  justify-content: center;
+  perspective: 1200px;
+}
+
+.card {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  cursor: pointer;
+  transform-style: preserve-3d;
+}
+
+.card.flip .card-front {
+    transform: rotateY(-180deg);
+}
+
+.card.flip .card-back {
+    transform: rotateY(0deg);
+}
+
+.card-back,
+.card-front {
+    position: absolute; 
+    height: 100%;
+    width: 100%;
+    backface-visibility: hidden;
+    transition: all .4s ease-in-out;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    background: radial-gradient(circle, var(--blue-card-1) 0%, var(--blue-card-2) 100%);
+}
+
+.card-front img {
+  border-radius: 10px;
+}
+
+.footer-container {
+    background-color: #3f4d63;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 60px;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.4);
+  }
+  
+  .link {
+    font-size: 2em;
+    color: #ffffff;
+    display: flex;
+    gap: 25px;
+  }
+  
+  .github-link {
+    text-decoration: none;
+    color: #ffffff;
+    transition: .5s;
+  }
+  
+  .github-link:hover {
+    color: #c6ccd8;
+  }
+  
+  a svg:hover {
+    fill: #c6ccd8;
+  }
+  
+  a svg {
+    fill: #ffffff;
+    transition: .5s;
+    width: 100px;
+  }
+
+  @media(max-width: 2000px) {
+    @keyframes overlay {
+      from {
+        background-color: rgba(0, 0, 0, 0);
+        font-size: 0;
+      }
+      to {
+        background-color: rgba(0, 0, 0, .7);
+        font-size: 6em;
+      }
+    }
+
+    .modal-body {
+      max-width: 700px;
+    }
+
+    .modal-title {
+      font-size: 5em;
+    }
+
+    .overlay-span {
+      font-size: 3em;
+    }
+
+    .results {
+      font-size: 1.8em;
+    }
+
+    .card {
+      width: 225px;
+      height: 150px;
+    }
+
+    .inform-container {
+      font-size: 4em;
+      width: 200px;
+    }
+
+    .result-button {
+      width: 200px;
+      padding: 8px;
+    }
+  }
+
+  @media(max-width: 1440px) {
+
+    .modal-body {
+      max-width: 600px;
+    }
+
+    .modal-title {
+      font-size: 4em;
+    }
+
+    .overlay-span {
+      font-size: 2em;
+    }
+
+    .results {
+      font-size: 1.5em;
+    }
+
+    .card {
+      width: 150px;
+      height: 100px;
+  }
+
+  .result-button {
+    width: 150px;
+    padding: 8px;
+  }
+}
+
+@media(max-width: 1024px) {
+
+  @keyframes overlay {
+    from {
+      background-color: rgba(0, 0, 0, 0);
+      font-size: 0;
+    }
+    to {
+      background-color: rgba(0, 0, 0, .7);
+      font-size: 4em;
+    }
+  }
+
+  .main {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .inform-container {
+    display: none;
+  }
+
+  .mobile-inform-container {
+    display: block;
+    width: 500px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.7em;
+    color: var(--blue-text);
+  text-shadow: rgba(0,0,0,0.3) 0px 4px 8px;
+  }
+
+  .result-button {
+    width: 100px;
+    padding: 6px;
+    font-size: 0.7em;
+  }
+
+  .modal-body {
+    max-width: 500px;
+    padding: 20px;
+  }
+
+  .modal-title {
+    font-size: 3em;
+  }
+
+  .overlay-span {
+    font-size: 1.6em;
+  }
+
+  .results {
+    font-size: 1.2em;
+  }
+
+
+  .footer-container {
+    height: 30px;
+  }
+
+  .link {
+    font-size: 1em;
+  }
+
+  a svg {
+    width: 35px;
+  }
+
+}
+
+@media(max-width: 768px) {
+
+  @keyframes overlay {
+    from {
+      background-color: rgba(0, 0, 0, 0);
+      font-size: 0;
+    }
+    to {
+      background-color: rgba(0, 0, 0, .7);
+      font-size: 2em;
+    }
+  }
+
+  .modal-body {
+    max-width: 300px;
+  }
+
+  .modal-title {
+    font-size: 2.6em;
+  }
+
+  .overlay-span {
+    font-size: 1.4em;
+  }
+
+  .results {
+    font-size: 1em;
+  }
+    .card {
+      width: 71.9px;
+      height: 47.9px;
+  }
+
+  .mobile-inform-container {
+    width: 300px;
+  }
+
+  .result-button {
+    width: 80px;
+    padding: 6px;
+  }
+}
