@@ -2,8 +2,7 @@
 
 ## About
 
-RSPreschool project
-Little memory game
+Little memory game as a RSPreschool project
 
 * [Task description](https://github.com/rolling-scopes-school/tasks/blob/master/tasks/js30%23/js30-8.md)
 
